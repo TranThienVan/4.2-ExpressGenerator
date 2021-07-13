@@ -35,7 +35,7 @@ function ourCustomMiddleware(req, res, next){
 
     // Web may request 20
     // Mobile may request 3
-    req.page = req.query.page;
+    req.page = req.query.page || 1;
     req.limit = req.query.limit || 20;
 
     next()

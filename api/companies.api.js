@@ -32,16 +32,35 @@ router.get('/', (req, res) =>{
        
         let page = req.page
         let limit = req.limit
+        let companyNames = ['Facebook', 'Apple', 'Twitch']
         // console.log({page: req.page})
         // console.log({limit: req.limit})
         
         // As a client app I can make a GET request to http://localhost:5000/companies?page=n and receive an array, the nth array of 20 companies.
         if(req.query.page == req.page){
+            console.log({page: req.page})
             console.log({page: req.query.page})
             console.log({limit: req.query.limit})
+            
             let result = companies.slice((limit*(page-1)), limit*page)
             res.status(202).send(result)
             console.log(result.length)
+        } else if (req.query.name === "Facebook"){
+            let result = []
+            console.log(req.query.name)
+            for(let i in companies){
+                result.push(companies[i])
+            }
+            result = result.filter((x) => x.name === "Facebook")
+            res.status(202).send(result)
+        } else {
+            let result = []
+            for (let i in companies){
+                result.push(companies[i])
+            }
+            console.log(req.query.name)
+            // console.log(result)
+            res.status(202).send(result)
         }
         
     } catch (error) {
